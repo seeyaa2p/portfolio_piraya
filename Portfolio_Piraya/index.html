@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piraya Pongpimai - Cybersecurity Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #06091D; /* Darker navy blue background */
+            color: #e2e8f0;
+            overflow-x: hidden; /* Prevent horizontal scrollbar from snow */
+        }
+        .glass-effect {
+            background: rgba(17, 24, 39, 0.8); /* Increased opacity for better readability */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Hero background style */
+        #home {
+            position: relative;
+            overflow: hidden;
+            background-color: #0a0a0a; /* Fallback color for matrix canvas */
+        }
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3; /* Ensure content is above the curve */
+            background: rgba(10, 10, 10, 0.7); /* Semi-transparent overlay for text readability */
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        /* Snowfall CSS Animation */
+        #snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind content, but visible */
+            pointer-events: none;
+        }
+
+        .snow {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+        
+        main > section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title-glow {
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .cta-button-glow {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6), 0 0 5px rgba(59, 130, 246, 0.8);
+        }
+        
+        /* Typing animation styles */
+        .typing-cursor::after {
+            content: '_';
+            display: inline-block;
+            animation: blink 1s infinite;
+            color: #1E90FF; /* Blue cursor */
+            font-weight: bold;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Animation for the name */
+        @keyframes wave-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+
+        @keyframes color-pan {
+          0% { background-position: 0% center; }
+          100% { background-position: -200% center; }
+        }
+
+        #animated-name {
+            display: inline-block;
+        }
+
+        #animated-name span {
+            display: inline-block;
+            background: linear-gradient(90deg, #6ee7b7, #3b82f6, #a78bfa, #f472b6, #6ee7b7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200%;
+            animation: wave-float 3s ease-in-out infinite, color-pan 8s linear infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Snow Container -->
+    <div id="snow-container"></div>
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-white flex items-center">
+                    <i data-lucide="fedora" class="mr-2 text-blue-500"></i>
+                    Piraya Pongpimai
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-slate-300 hover:text-blue-400 transition-colors">Home</a>
+                    <a href="#about" class="text-slate-300 hover:text-blue-400 transition-colors">About</a>
+                    <a href="#certificates" class="text-slate-300 hover:text-blue-400 transition-colors">Certificates</a>
+                    <a href="#activities" class="text-slate-300 hover:text-blue-400 transition-colors">Activities</a>
+                    <a href="#contact" class="text-slate-300 hover:text-blue-400 transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="#home" class="block text-slate-300 hover:text-blue-400 transition-colors py-2">Home</a>
+                <a href="#about" class="block text-slate-300 hover:text-blue-400 transition-colors py-2">About Me</a>
+                <a href="#certificates" class="block text-slate-300 hover:text-blue-400 transition-colors py-2">Certificates</a>
+                <a href="#activities" class="block text-slate-300 hover:text-blue-400 transition-colors py-2">Activities</a>
+                <a href="#contact" class="block text-slate-300 hover:text-blue-400 transition-colors py-2">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center">
+            <canvas id="matrix-canvas"></canvas>
+            <div class="hero-content">
+                <h1 id="animated-name" class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider">
+                    Piraya Pongpimai
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+                    A passionate Cybersecurity and Computer Science student from Bangkok University seeking a challenging internship opportunity.
+                </p>
+                <div class="mt-10">
+                    <a href="#contact" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 cta-button-glow">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+             <!-- Curved transition SVG -->
+            <div class="absolute bottom-0 left-0 w-full z-20" style="margin-bottom: -1px;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150">
+                    <path fill="#06091D" fill-opacity="1" d="M0,96L80,112C160,128,320,160,480,160C640,160,800,128,960,106.7C1120,85,1280,75,1360,69.3L1440,64L1440,150L0,150Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <div class="section-container">
+            <!-- About Me Section -->
+            <section id="about" class="py-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white section-title-glow">About Me</h2>
+                    </div>
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <div class="lg:w-1/3">
+                            <img src="images/Profile.jpeg" alt="Piraya Pongpimai" class="w-64 h-64 rounded-full mx-auto object-cover border-4 border-blue-500/50">
+                        </div>
+                        <div class="lg:w-2/3 text-center lg:text-left">
+                            <h3 id="about-me-name" class="text-3xl font-bold text-white min-h-[40px]"></h3>
+                            <p id="typing-subtitle" class="text-xl mt-1 min-h-[56px]" style="color: #1E90FF;"></p>
+                            <p class="text-slate-300 mt-6 text-lg leading-relaxed">
+                                I am a fourth-year student from Bangkok University with a strong passion for cybersecurity. I am actively seeking an internship to apply my academic knowledge to real-world challenges. My goal is to leverage my skills in a professional setting and contribute to creating secure digital environments. I am a fast learner, a collaborative team player, and I am eager to develop new skills.
+                            </p>
+                            <div class="mt-8 flex justify-center lg:justify-start space-x-4">
+                                <a href="https://www.linkedin.com/in/piraya-pongpimai" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Personal Details Section -->
+            <section id="personal-details" class="py-20">
+                <div class="container mx-auto px-6">
+                     <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white section-title-glow">Personal Details</h2>
+                    </div>
+                    <div class="max-w-3xl mx-auto glass-effect rounded-xl p-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-lg">
+                            <div class="flex items-center">
+                                <i data-lucide="user-check" class="w-6 h-6 mr-4" style="color: #1E90FF;"></i>
+                                <div>
+                                    <p class="font-semibold text-white">Nickname</p>
+                                    <p class="text-white">Aomsin</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="user" class="w-6 h-6 mr-4" style="color: #1E90FF;"></i>
+                                 <div>
+                                    <p class="font-semibold text-white">Age</p>
+                                    <p class="text-white">21 Years</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="py-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white section-title-glow">Education</h2>
+                    </div>
+                    <div class="max-w-3xl mx-auto space-y-8">
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-white">Bangkok University</h3>
+                                    <p class="text-lg" style="color: #1E90FF;">School of Information Technology and Innovation</p>
+                                </div>
+                                <p class="text-slate-400 text-right">2022 - Present</p>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-slate-300 text-lg">Bachelor of Science</p>
+                                <p class="text-slate-300 mt-1">Major: Computer Science, Data Science & Cybersecurity</p>
+                                <p class="text-slate-300 mt-1">Current GPA: 3.53</p>
+                            </div>
+                        </div>
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-white">Khonburi School</h3>
+                                    <p class="text-lg" style="color: #1E90FF;">Nakhon Ratchasima, Thailand</p>
+                                </div>
+                                <p class="text-slate-400 text-right">2016 - 2022</p>
+                            </div>
+                            <div class="mt-4">
+                                <p class="text-slate-300 text-lg">High School Diploma (English-Chinese Program)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="py-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white section-title-glow">My Skills</h2>
+                    </div>
+                    
+                    <!-- Tools & Technologies -->
+                    <div class="mb-16">
+                        <h3 class="text-2xl md:text-3xl font-bold text-center mb-8" style="color: #1E90FF;">Tools & Technologies</h3>
+                        <div class="grid grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
+                             <!-- Skill: Kali Linux -->
+                             <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/kali-linux.png" alt="Kali Linux" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Kali Linux</p>
+                            </div>
+                            <!-- Skill: Wireshark -->
+                             <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Wireshark_icon.svg" alt="Wireshark" class="w-16 h-16 mb-2" />
+                                <p class="font-semibold text-base text-white">Wireshark</p>
+                            </div>
+                             <!-- Skill: Nmap -->
+                             <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/radar.png" alt="Nmap" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Nmap</p>
+                            </div>
+                            <!-- Skill: Metasploit -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/bug.png" alt="Metasploit" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Metasploit</p>
+                            </div>
+                            <!-- Skill: Burp Suite -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="images/burp-suite.svg" alt="Burp Suite" class="w-16 h-16 mb-2" />
+                                <p class="font-semibold text-base text-white">Burp Suite</p>
+                            </div>
+                            
+                             <!-- Skill: Figma -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/figma.png" alt="Figma" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Figma</p>
+                            </div>
+                            <!-- Skill: Azure -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/azure-1.png" alt="Azure" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Azure</p>
+                            </div>
+                            <!-- Skill: Canva -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/canva.png" alt="Canva" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Canva</p>
+                            </div>
+                             <!-- Skill: Visual Studio Code -->
+                             <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/visual-studio-code-2019.png" alt="Visual Studio Code" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-sm text-white text-center">VS Code</p>
+                            </div>
+                             <!-- Skill: Python -->
+                             <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/000000/python--v1.png" alt="Python" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Python</p>
+                            </div>
+                            <!-- Skill: HTML -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/html-5.png" alt="HTML" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">HTML</p>
+                            </div>
+                            <!-- Skill: SQL -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/color/96/sql.png" alt="SQL" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">SQL</p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Security Concepts -->
+                    <div class="mb-16">
+                        <h3 class="text-2xl md:text-3xl font-bold text-center mb-8" style="color: #1E90FF;">Security Concepts</h3>
+                        <div class="grid grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
+                           <!-- Skill: Network Security -->
+                           <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/firewall.png" alt="Network Security" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-sm text-white text-center">Network Security</p>
+                            </div>
+                            <!-- Skill: Cryptography -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/key-security.png" alt="Cryptography" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Cryptography</p>
+                            </div>
+                            <!-- Skill: Penetration Testing -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/hacker.png" alt="Penetration Testing" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-sm text-white text-center">Penetration Testing</p>
+                            </div>
+                            <!-- Skill: Risk Assessment -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/combo-chart.png" alt="Risk Assessment" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-sm text-white text-center">Risk Assessment</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-center mb-8" style="color: #1E90FF;">Soft Skills & Languages</h3>
+                        <div class="grid grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
+                            <!-- Skill: Communication -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/000000/communication.png" alt="Communication" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Communication</p>
+                            </div>
+                            <!-- Skill: Teamwork -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/teamwork.png" alt="Teamwork" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Teamwork</p>
+                            </div>
+                            <!-- Skill: Problem-Solving -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/000000/puzzle.png" alt="Problem-Solving" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Problem-Solving</p>
+                            </div>
+                            <!-- Skill: Adaptability -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/000000/synchronize.png" alt="Adaptability" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Adaptability</p>
+                            </div>
+                            <!-- Skill: Integrity -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/000000/handshake.png" alt="Integrity" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">Integrity</p>
+                            </div>
+                            <!-- Skill: English -->
+                            <div class="glass-effect rounded-2xl p-4 flex flex-col items-center justify-center aspect-square hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+                                <img src="https://img.icons8.com/fluency/96/translation.png" alt="English" class="w-16 h-16 mb-2"/>
+                                <p class="font-semibold text-base text-white">English</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certificates Section -->
+            <section id="certificates" class="py-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white section-title-glow">Certificates</h2>
+                        <p class="text-slate-400 mt-4 text-lg">My verified accomplishments and credentials.</p>
+                    </div>
+                    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/Cyber Warrior_certificate.jpg" alt="Cyber Warrior Hackathon 2025 Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Cyber Warrior Hackathon 2025</h3>
+                            <p style="color: #1E90FF;">Certificate of Participation</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/NCSA_ Professional.jpg" alt="Cybersecurity Professional Course Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Cybersecurity Professional Course</h3>
+                            <p style="color: #1E90FF;">National Cyber Security Agency (NCSA)</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/PDPA_Certificate.jpg" alt="PDPA Hackathon 2024 Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">PDPA Hackathon 2024 - 2nd Runner-up</h3>
+                            <p style="color: #1E90FF;">Krungthai & PDPC</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/Coursera.jpg" alt="Coursera Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Customer Service with Python: Build a Chatbot using ChatGPT</h3>
+                            <p style="color: #1E90FF;">Coursera</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                         <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/ISC2.jpg" alt="ISC2 Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Certified in Cybersecurity (CC)</h3>
+                            <p style="color: #1E90FF;">ISC2</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/THM-DYA6LCLO9M.png" alt="Try Hack Me Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Introduction to Cyber Security Learning Path</h3>
+                            <p style="color: #1E90FF;">Try Hack Me</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/NCSA.jpeg" alt="NCSA Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Cybersecurity Foundation Course</h3>
+                            <p style="color: #1E90FF;">National Cyber Security Agency (NCSA)</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/MOOC.jpeg" alt="MOOC Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Basic Cybersecurity</h3>
+                            <p style="color: #1E90FF;">Cybersecurity Learning Platform (MOOC)</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                        <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/CTF_TOP2024.jpeg" alt="Thailand Cyber Top Talent Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Thailand Cyber Top Talent 2024</h3>
+                            <p style="color: #1E90FF;">Certificate of Participation</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                         <!-- CERTIFICATE ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/CTF_Woman2024.jpeg" alt="Women Thailand Cyber Top Talent Certificate" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <h3 class="text-xl font-bold text-white">Women Thailand Cyber Top Talent 2024</h3>
+                            <p style="color: #1E90FF;">Certificate of Participation</p>
+                        </div>
+                        <!-- CERTIFICATE ITEM END -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activities Section -->
+            <section id="activities" class="py-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white section-title-glow">Activities</h2>
+                        <p class="text-slate-400 mt-4 text-lg">My engagement in the cybersecurity community.</p>
+                    </div>
+                    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- ACTIVITY ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/Cyberwarrior.jpg" alt="Cyber Warrior Hackathon 2025" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Cyber Warrior Hackathon 2025</h3>
+                                    <p style="color: #1E90FF;">National Cyber Security Agency (NCSA)</p>
+                                </div>
+                                <p class="text-slate-400 text-right">2025</p>
+                            </div>
+                            <p class="text-slate-300 mt-4">Participated in the Cyber Warrior Hackathon 2025, a national-level cybersecurity competition.</p>
+                        </div>
+                        <!-- ACTIVITY ITEM END -->
+                        <!-- ACTIVITY ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/PDPA2024.jpeg" alt="PDPA Hackathon 2024" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">PDPA Hackathon 2024</h3>
+                                    <p style="color: #1E90FF;">Krungthai & PDPC</p>
+                                </div>
+                                <p class="text-slate-400 text-right">2024</p>
+                            </div>
+                            <p class="text-slate-300 mt-4">Achieved 2nd runner-up in a hackathon focused on data privacy and protection under the Personal Data Protection Act (PDPA).</p>
+                        </div>
+                        <!-- ACTIVITY ITEM END -->
+                         <!-- ACTIVITY ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/TGR2024.avif" alt="TESA Topgun Rally" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">TESA Topgun Rally 2024 #18</h3>
+                                    <p style="color: #1E90FF;">Thai Embedded Systems Association (TESA)</p>
+                                </div>
+                                <p class="text-slate-400 text-right">2024</p>
+                            </div>
+                            <p class="text-slate-300 mt-4">Participated in a practical skills development and innovation program in electrical and electronics engineering.</p>
+                        </div>
+                        <!-- ACTIVITY ITEM END -->
+                        <!-- ACTIVITY ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/OPH.jpg" alt="BU Open House" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Staff Member, BU Open House</h3>
+                                    <p style="color: #1E90FF;">Bangkok University</p>
+                                </div>
+                                <p class="text-slate-400 text-right">2024</p>
+                            </div>
+                            <p class="text-slate-300 mt-4">Served as a staff member for the Bangkok University Open House, representing the School of IT and Innovation.</p>
+                        </div>
+                        <!-- ACTIVITY ITEM END -->
+                         <!-- ACTIVITY ITEM START -->
+                        <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-blue-500 transition-all duration-300 overflow-hidden">
+                            <img src="images/CTF_BU.jpeg" alt="BU-ITI CTF Competition" class="lightbox-trigger w-full h-auto rounded-md mb-4 cursor-pointer hover:opacity-80 transition-opacity">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">BU-ITI CTF Competition 2025</h3>
+                                    <p style="color: #1E90FF;">Bangkok University</p>
+                                </div>
+                                <p class="text-slate-400 text-right">2025</p>
+                            </div>
+                            <p class="text-slate-300 mt-4">Participated in the BU-ITI CTF Competition 2025, a Capture The Flag cybersecurity challenge.</p>
+                        </div>
+                        <!-- ACTIVITY ITEM END -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white section-title-glow">Get in Touch</h2>
+                        <p class="text-slate-400 mt-4 text-lg">I'm currently looking for internship opportunities. Let's connect!</p>
+                    </div>
+                    <div class="max-w-3xl mx-auto text-center">
+                        <div class="space-y-6">
+                            <a href="mailto:Piraya.ppi2003@gmail.com" class="flex items-center justify-center text-lg text-slate-300 hover:text-blue-400 transition-colors">
+                                <i data-lucide="mail" class="w-6 h-6 mr-3" style="color: #1E90FF;"></i>
+                                <span>Piraya.ppi2003@gmail.com</span>
+                            </a>
+                            <a href="tel:+66625619154" class="flex items-center justify-center text-lg text-slate-300 hover:text-blue-400 transition-colors">
+                                <i data-lucide="phone" class="w-6 h-6 mr-3" style="color: #1E90FF;"></i>
+                                <span>+66 (0) 62-561-9154</span>
+                            </a>
+                        </div>
+                         <div class="mt-10 flex justify-center space-x-6">
+                            <a href="https://www.linkedin.com/in/piraya-pongpimai" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="linkedin" class="w-10 h-10"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-slate-400">
+            <p>&copy; 2024 Piraya Pongpimai. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[100] hidden">
+        <span id="close-lightbox" class="absolute top-5 right-8 text-white text-5xl font-bold cursor-pointer">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged View" class="max-w-[90vw] max-h-[90vh] rounded-lg">
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Header background on scroll
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('glass-effect');
+                } else {
+                    header.classList.remove('glass-effect');
+                }
+            });
+            
+            // Animated name script
+            const nameElement = document.getElementById('animated-name');
+            if (nameElement) {
+                const nameText = nameElement.textContent.trim();
+                nameElement.innerHTML = '';
+                for (let i = 0; i < nameText.length; i++) {
+                    const char = nameText[i];
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.style.setProperty('--i', i);
+                    if (char === ' ') {
+                        span.style.width = '0.5em'; // Give space some width
+                    }
+                    nameElement.appendChild(span);
+                }
+            }
+
+            // Matrix rain animation
+            const canvas = document.getElementById('matrix-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+
+                const resizeCanvas = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                };
+
+                resizeCanvas();
+
+                const alphabet = '01{}[]()<>/\$#*ABCDEFabcdef';
+                const fontSize = 16;
+                const columns = canvas.width / fontSize;
+
+                const rainDrops = [];
+                for (let x = 0; x < columns; x++) {
+                    rainDrops[x] = 1;
+                }
+
+                const draw = () => {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    ctx.font = fontSize + 'px monospace';
+
+                    for (let i = 0; i < rainDrops.length; i++) {
+                        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                        
+                        // Add color variation
+                        if (Math.random() > 0.98) {
+                           ctx.fillStyle = '#c7f9cc'; // Lighter green for highlight
+                        } else {
+                           ctx.fillStyle = '#2dc937'; // Main green color
+                        }
+
+                        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                            rainDrops[i] = 0;
+                        }
+                        rainDrops[i]++;
+                    }
+                };
+
+                setInterval(draw, 33);
+                
+                window.addEventListener('resize', resizeCanvas);
+            }
+
+            // Typing animation for subtitle and name in About section
+            const aboutSection = document.getElementById('about');
+            const aboutMeName = document.getElementById('about-me-name');
+            const typingSubtitle = document.getElementById('typing-subtitle');
+            let aboutAnimationStarted = false;
+
+            const startAboutAnimations = () => {
+                if (aboutAnimationStarted) return;
+                aboutAnimationStarted = true;
+
+                const startSubtitleTyping = () => {
+                    if (typingSubtitle) {
+                        const phrases = [
+                            "I'm a Hacker",
+                            "I'm a Cloud Security Specialist",
+                            "I'm a Computer Science, Data Science & Cybersecurity Student"
+                        ];
+
+                        let phraseIndex = 0;
+                        let charIndex = 0;
+                        let isDeleting = false;
+                        let timeoutId;
+
+                        const type = () => {
+                            const currentPhrase = phrases[phraseIndex];
+                            let typeSpeed = 120;
+
+                            if (isDeleting) {
+                                typingSubtitle.textContent = currentPhrase.substring(0, charIndex - 1);
+                                charIndex--;
+                                typeSpeed = 60;
+                            } else {
+                                typingSubtitle.textContent = currentPhrase.substring(0, charIndex + 1);
+                                charIndex++;
+                            }
+
+                            if (!isDeleting && charIndex === currentPhrase.length) {
+                                if (phraseIndex === phrases.length - 1) {
+                                    clearTimeout(timeoutId);
+                                    return; 
+                                }
+                                typeSpeed = 2000; 
+                                isDeleting = true;
+                            } 
+                            else if (isDeleting && charIndex === 0) {
+                                isDeleting = false;
+                                phraseIndex++;
+                                typeSpeed = 500;
+                            }
+                            
+                            timeoutId = setTimeout(type, typeSpeed);
+                        }
+                        type();
+                    }
+                };
+                
+                if(aboutMeName){
+                    const nameText = "Piraya Pongpimai";
+                    let i = 0;
+                    
+                    const typeNameAbout = () => {
+                        if (i < nameText.length) {
+                            aboutMeName.innerHTML += nameText.charAt(i);
+                            i++;
+                            setTimeout(typeNameAbout, 150);
+                        } else {
+                            startSubtitleTyping(); 
+                        }
+                    }
+                    typeNameAbout();
+                }
+            };
+
+            const aboutObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startAboutAnimations();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            if (aboutSection) {
+                aboutObserver.observe(aboutSection);
+            }
+
+            // Snowfall CSS Animation
+            const snowContainer = document.getElementById('snow-container');
+            if (snowContainer) {
+                const createSnowflake = () => {
+                    const snow = document.createElement('span');
+                    snow.className = 'snow';
+
+                    const size = Math.random() * 3 + 1 + 'px';
+                    snow.style.width = size;
+                    snow.style.height = size;
+                    snow.style.left = Math.random() * 100 + 'vw';
+                    snow.style.animationDuration = Math.random() * 5 + 10 + 's';
+                    snow.style.animationDelay = Math.random() * 5 + 's';
+                    snow.style.opacity = Math.random();
+
+                    snowContainer.appendChild(snow);
+                };
+
+                for (let i = 0; i < 150; i++) {
+                    createSnowflake();
+                }
+            }
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeLightbox = document.getElementById('close-lightbox');
+            const imageTriggers = document.querySelectorAll('.lightbox-trigger');
+
+            imageTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    // Use a higher resolution placeholder for the lightbox
+                    const highResSrc = trigger.src.replace(/500x250/, '1200x600');
+                    lightboxImg.src = highResSrc;
+                    lightbox.classList.remove('hidden');
+                });
+            });
+
+            const hideLightbox = () => {
+                lightbox.classList.add('hidden');
+                lightboxImg.src = ''; // Clear src to stop loading if in progress
+            };
+
+            closeLightbox.addEventListener('click', hideLightbox);
+            lightbox.addEventListener('click', (e) => {
+                // Close if the background is clicked, not the image itself
+                if (e.target === lightbox) {
+                    hideLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
