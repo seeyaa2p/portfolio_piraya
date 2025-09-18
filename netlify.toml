@@ -1,0 +1,9 @@
+# Netlify configuration for this repo
+# Deploy the static site located in the Portfolio_Piraya subfolder
+
+[build]
+  publish = "Portfolio_Piraya"
+  command = ""
+
+[context.production]
+  publish = "Portfolio_Piraya"
