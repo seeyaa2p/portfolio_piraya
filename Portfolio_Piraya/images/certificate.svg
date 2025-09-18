@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#ffffff" stroke="#d4af37" stroke-width="10"/>
+  
+  <!-- Header logos and text -->
+  <g transform="translate(600, 130)">
+    <!-- Krungthai Logo (simplified) -->
+    <circle cx="-200" cy="0" r="60" fill="#f0f0f0" stroke="#666" stroke-width="2"/>
+    <text x="-200" y="10" font-family="Arial" font-size="24" text-anchor="middle" fill="#666">Krungthai</text>
+    
+    <!-- X symbol -->
+    <text x="0" y="10" font-family="Arial" font-size="40" text-anchor="middle" fill="#d4af37">X</text>
+    
+    <!-- PDPC Logo (simplified) -->
+    <circle cx="200" cy="0" r="60" fill="#f0f0f0" stroke="#666" stroke-width="2"/>
+    <text x="200" y="10" font-family="Arial" font-size="24" text-anchor="middle" fill="#666">PDPC</text>
+  </g>
+  
+  <!-- Thai text lines -->
+  <text x="600" y="230" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">ธนาคารกรุงไทย และ สำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล</text>
+  <text x="600" y="270" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">ขอมอบใบประกาศนียบัตรนี้เพื่อแสดงว่า</text>
+  
+  <!-- Name -->
+  <text x="600" y="350" font-family="Arial" font-size="48" font-weight="bold" text-anchor="middle" fill="#333">พิรญาณ์ พงษ์พิมาย</text>
+  
+  <!-- Institution -->
+  <text x="600" y="430" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">คณะเทคโนโลยีสารสนเทศและนวัตกรรม มหาวิทยาลัยกรุงเทพ</text>
+  
+  <!-- Award text -->
+  <text x="600" y="510" font-family="Arial" font-size="32" font-weight="bold" text-anchor="middle" fill="#333">ได้รับรางวัลรองชนะเลิศอันดับ 2</text>
+  <text x="600" y="550" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">โครงการแข่งขันนวัตกรรมด้านการคุ้มครองข้อมูลส่วนบุคคลระดับอุดมศึกษา</text>
+  <text x="600" y="580" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">(PDPA Hackathon 2024 by Krungthai x PDPC: Trust and Sustainability)</text>
+  
+  <!-- Date -->
+  <text x="600" y="630" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">ให้ไว้ ณ วันที่ 25 ธันวาคม พ.ศ. 2567</text>
+  
+  <!-- Signatures -->
+  <g transform="translate(300, 730)">
+    <path d="M-50,0 C-30,20 -10,-20 10,0" stroke="#000" stroke-width="2" fill="none"/>
+    <text x="0" y="50" font-family="Arial" font-size="18" text-anchor="middle" fill="#333">นายผยง ศรีวณิช</text>
+    <text x="0" y="75" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">กรรมการผู้จัดการใหญ่ ธนาคารกรุงไทย</text>
+  </g>
+  
+  <g transform="translate(900, 730)">
+    <path d="M-50,0 C-30,20 -10,-20 10,0" stroke="#000" stroke-width="2" fill="none"/>
+    <text x="0" y="50" font-family="Arial" font-size="18" text-anchor="middle" fill="#333">นายเวทางค์ พ่วงทรัพย์</text>
+    <text x="0" y="75" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">เลขาธิการคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล</text>
+  </g>
+  
+  <!-- Medal/Seal -->
+  <g transform="translate(600, 770)">
+    <circle cx="0" cy="0" r="60" fill="#d4af37" stroke="#333" stroke-width="2"/>
+    <text x="0" y="10" font-family="Arial" font-size="40" font-weight="bold" text-anchor="middle" fill="#fff">3</text>
+    <text x="0" y="30" font-family="Arial" font-size="12" text-anchor="middle" fill="#fff">PDPA</text>
+  </g>
+</svg>
