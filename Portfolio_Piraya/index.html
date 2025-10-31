@@ -17,6 +17,14 @@
             color: #e2e8f0;
             overflow-x: hidden; /* Prevent horizontal scrollbar from snow */
         }
+        /* Ensure certificate/activity images render with correct sizing */
+        .glass-effect img.lightbox-trigger {
+            display: block;
+            width: 100%;
+            height: auto !important;
+            opacity: 1;
+            visibility: visible;
+        }
         .glass-effect {
             background: rgba(17, 24, 39, 0.8); /* Increased opacity for better readability */
             backdrop-filter: blur(10px);
